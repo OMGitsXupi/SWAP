@@ -1,5 +1,5 @@
-#Prácticas 1 y 2 - SWAP
-###Por: Antonio Galdó Seiquer
+# Prácticas 1 y 2 - SWAP
+### Por: Antonio Galdó Seiquer
 Teniendo ya las máquinas instaladas, con el LAMP configurado y la configuración de interfaz de red para que se conectaran las máquinas entre sí y con el host, he realizado los siguientes pasos para tener una copia del servidor web en una de las máquinas de la otra.
 Como ya tenemos 'rsync' instalado por defecto no hará falta instalarlo.
 
