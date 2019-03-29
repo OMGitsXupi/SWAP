@@ -21,4 +21,4 @@ A continuación he configurado el crontab para que ejecute rsync cada 1 minuto c
 xupi@SWAP2:~$ sudo nano /etc/crontab
 ```
 He añadido la orden rsync `rsync -auv -e ssh 192.168.56.105:/var/www/ /var/www` y el archivo queda así:
-![ ](/home/xupi/Escritorio/SWAP/P1yP2/crontab.png  "resultado de crontab:")
+![ ](crontab.png  "resultado de crontab:")
