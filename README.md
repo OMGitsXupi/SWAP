@@ -13,7 +13,7 @@ auto enp0s8
 iface enp0s8 inet static
 address 192.168.56.110
 ```
-Tras esto hay que levantar la interfaz de red con ```ifup enp0s3``` o reiniciar y ya está.
+Tras esto hay que levantar la interfaz de red con ```ifup enp0s8``` o reiniciar y ya está.
 
 Teniendo ya las máquinas instaladas, con el LAMP configurado y la configuración de interfaz de red para que se conectaran las máquinas entre sí y con el host, he realizado los siguientes pasos para tener una copia del servidor web en una de las máquinas de la otra.
 Como ya tenemos 'rsync' instalado por defecto no hará falta instalarlo.
