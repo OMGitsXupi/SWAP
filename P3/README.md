@@ -15,16 +15,16 @@ LoadBalacer@xupi:~$ sudo apt-get install nginx
 LoadBalacer@xupi:~$ sudo systemctl start nginx
 ```
 He creado el archivo __/etc/nginx/conf.d/default.conf__ y he escrito lo que se ve en la imagen: 
-![](/home/xupi/Escritorio/SWAP/P3/nginx-default.png) 
+![](nginx-default.png) 
 Ahora probando el curl desde mi máquina host hacia nginx funciona:
-![](/home/xupi/Escritorio/SWAP/P3/curl1.png)
+![](curl1.png)
 
 #### En HAProxy:
 He instalado correctamente HAProxy y cambiado el archivo de configuración para que detecte ambas máquinas y vemos cómo no tiene el apache funcionando y nos redirige a una de las máquinas haciendo curl:
-![](/home/xupi/Escritorio/SWAP/P3/haproxy.png)
+![](haproxy.png)
 
 Aquí podemos ver el archivo __/etc/haproxy/haproxy.cfg__
-![](/home/xupi/Escritorio/SWAP/P3/hap1.png)
+![](hap1.png)
 
 TEST
 En estas capturas veremos el resultado de ejecutar _top_ en todas las máquinas y con la siguiente orden (desde la máquina host) hacer muchas peticiones (10000) al balanceador.
@@ -32,7 +32,7 @@ En estas capturas veremos el resultado de ejecutar _top_ en todas las máquinas 
 xupi@xupi-Linux:~$ ab -n 10000 -c 10 http://192.168.56.120/index.html
 ```
 Nginx:
-![](/home/xupi/Escritorio/SWAP/P3/topNG.png)
+![](topNG.png)
 HAProxy:
-![](/home/xupi/Escritorio/SWAP/P3/topHA.png)
+![](topHA.png)
 
