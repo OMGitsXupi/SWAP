@@ -1,7 +1,6 @@
 # Trabajo Final - SWAP
 # Balanceador de Carga sobre AWS
-## Por: Antonio Galdó Seiquer
-### Crear instancia
+## Crear instancia
 Vamos a hacer un balanceador de carga para múltiples servidores web sobre Amazon Web Service. Lo primero que haremos será registrarnos y seleccionar el plan gratuito (o bien la prueba gratis de 12 meses).
 Una vez hecho esto iniciaremos sesión y seremos redirigidos a la consola de AWS:
 ![ ](capturas/1.png)
@@ -31,7 +30,7 @@ Seremos redirigidos  a el menú de Instancias donde podremos ver su ip, pararlas
 
 __Aviso:__ El límite del plan gratuito en AWS son 750 horas de uso de instancia al mes, así que si usas una no pasa nada, pero al usar más de una instancia, hay que apagarlas para no superar el límite.
 
-###Conectarse a Instancia por SSH
+## Conectarse a Instancia por SSH
 Si hacemos click en `Connect` podremos ver los pasos que tendríamos que hacer para conectarnos por ssh, pero se puede hacer de la siguiente forma:
 Lo primero será restringir los permisos de la clave, por lo que iremos al directorio donde están las claves privadas y haremos lo siguiente:
 ```
@@ -48,20 +47,21 @@ El usuario en Ubuntu server es _ubuntu_, pero con Amazon Linux es _ec2-user_
 Y aparecerá algo como esto, lo que nos indica que ya estamos dentro de la máquina.
 ![ ](capturas/9.png)
 
-###Instalar servidor Web
+## Instalar servidor Web
 Ahora pondré los pasos básicos para instalar Apache, MySQL server y PHP en Ubuntu:
 
 ```
 sudo apt-get update
-sudo apt-get install apache2 -Y
-sudo apt-get install mysql-server -Y
+sudo apt-get install apache2 -y
+sudo apt-get install mysql-server -y
 ```
 Para configurar _MySQL_ haremos `sudo mysql_secure_installation` y dejaremos la configuración por defecto, no tenemos por qué rellenar nada excepto la contraseña.
 ```
-sudo apt-get install php libapache2-mod-php
+sudo apt-get install php libapache2-mod-php -y
 ```
 Ya tenemos el servidor web operativo, poniendo en cualquier navegador la dirección ip (_Public DNS_ o _Public IP_) veremos la página por defecto de Apache.
-###Crear Balanceador de Carga
+
+## Crear Balanceador de Carga
 Para hacer un balanceador que sirva para dividir la carga entre los dos servidores, previamente deberemos crear un __Target__:
 En la barra de la izquierda, buscamos la sección _Load Balancing_ y vamos a _Target Groups_ y pulsamos `Create target group` para crear uno. Lo llamamos como queramos y pulsamos `Create`
 ![ ](capturas/10.png)
@@ -75,7 +75,7 @@ Seleccionamos ambas instancias, las incluimos y pulsamos `Save`, quedaría así:
 Ahora, vamos a _Load Balancers_ en el menú lateral y le damos a crear uno. En las opciones que aparecen, nosotros seleccionaremos HTTP/HTTPS y pulsamos `Create`:
 ![ ](capturas/13.png)
 
-Le ponemos el nombre que queramos, y podemos añadir un Listener para HTTPS si queremos, pero para esto necesitaremos un certificado.
+Le ponemos el nombre que queramos, podemos añadir un Listener para HTTPS si queremos, pero para esto necesitaremos un certificado. Lo que sí es lo correcto que hagamos es seleccionar las tres _Availability Zones_ que nos aparecen para que se detecten las instancias seguro.
 Iremos a la pestaña _Configure Security Groups_ y seleccionaremos el grupo que creamos previamente.
 En _Configure Routing_ seleccionaremos el _Target Group_ que acabamos de crear.
 ![ ](capturas/14.png)
