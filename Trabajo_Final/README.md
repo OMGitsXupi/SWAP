@@ -1,20 +1,25 @@
-#Trabajo Final - SWAP
-#Balanceador de Carga sobre AWS
+# Trabajo Final - SWAP
+# Balanceador de Carga sobre AWS
 ## Por: Antonio Galdó Seiquer
-###Crear instancia
+### Crear instancia
 Vamos a hacer un balanceador de carga para múltiples servidores web sobre Amazon Web Service. Lo primero que haremos será registrarnos y seleccionar el plan gratuito (o bien la prueba gratis de 12 meses).
 Una vez hecho esto iniciaremos sesión y seremos redirigidos a la consola de AWS:
 ![ ](1.png  "consola:")
+
 En la búsqueda de servicios buscaremos `EC2`, que será nuestro espacio de trabajo.
 ![ ](2.png  "EC2:")
+
 En la esquina superior derecha de la web podemos cambiar la ubicación del servidor donde se crearán nuestras instancias, pero yo lo dejaré en _Ohio_.
 
 Haremos click en el botón de `Launch Instance` y tendremos una serie de opciones entre los SO disponibles. Yo elegiré _Ubuntu Server_, aunque el balanceador de carga sirve para cualquier sistema con servidor web.
 ![ ](3.png  "instancia1:")
+
 En las siguientes pantallas dejaremos las opciones por defecto hasta llegar al Security Group. Añadiremos dos reglas para _http_ y _https_.
 ![ ](4.png  "instancia2:")
+
  Como dice en el Warning, podemos cambiar la ip fuente en ssh a la nuestra para que solo podamos acceder nosotros, pero podemos dejarlo así.
 ![ ](5.png  "instancia3:")
+
 Iremos a _Review_ y pulsaremos `Launch`.
 Nos saldrá una ventana para las claves de ssh. La llamamos como queramos y guardaremos la clave privada bien porque nos servirá para acceder a nuestra máquina.
 ![ ](6.png  "instancia4:")
@@ -38,6 +43,7 @@ ssh ubuntu@[Dirección IP] -i MiClave1.pem
 El usuario en Ubuntu server es _ubuntu_, pero con Amazon Linux es _ec2-user_
 Y aparecerá algo como esto, lo que nos indica que ya estamos dentro de la máquina.
 ![ ](9.png  "ip:")
+
 ###Instalar servidor Web
 Ahora pondré los pasos básicos para instalar Apache, MySQL server y PHP en Ubuntu:
 
@@ -54,11 +60,13 @@ Ya tenemos el servidor web operativo, poniendo en cualquier navegador la direcci
 ###Crear Balanceador de Carga
 Para hacer un balanceador que sirva para dividir la carga entre los dos servidores, previamente deberemos crear un __Target__:
 En la barra de la izquierda, buscamos la sección _Load Balancing_ y vamos a _Target Groups_ y pulsamos `Create target group` para crear uno. Lo llamamos como queramos y pulsamos `Create`
-![ ](10.png  "group:")
+![ ](10.png)
+
 En el menú de _Target Groups_, seleccionaremos el que acabamos de crear y, abajo, en la pestaña de _Targets_ hacemos click en `Edit`.
-![ ](11.png  "group:")
+![ ](11.png)
+
 Seleccionamos ambas instancias, las incluimos y pulsamos `Save`, quedaría así:
-![ ](12.png  "group:")
+![ ](12.png)
 
 Ahora, vamos a _Load Balancers_ en el menú lateral y le damos a crear uno. En las opciones que aparecen, nosotros seleccionaremos HTTP/HTTPS y pulsamos `Create`:
 ![ ](13.png  "group:")
