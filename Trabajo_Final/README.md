@@ -51,13 +51,13 @@ Y aparecerá algo como esto, lo que nos indica que ya estamos dentro de la máqu
 ###Instalar servidor Web
 Ahora pondré los pasos básicos para instalar Apache, MySQL server y PHP en Ubuntu:
 
-```console
+```
 sudo apt-get update
 sudo apt-get install apache2 -Y
 sudo apt-get install mysql-server -Y
 ```
 Para configurar _MySQL_ haremos `sudo mysql_secure_installation` y dejaremos la configuración por defecto, no tenemos por qué rellenar nada excepto la contraseña.
-```console
+```
 sudo apt-get install php libapache2-mod-php
 ```
 Ya tenemos el servidor web operativo, poniendo en cualquier navegador la dirección ip (_Public DNS_ o _Public IP_) veremos la página por defecto de Apache.
