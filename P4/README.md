@@ -30,11 +30,12 @@ Aquí vemos cómo funciona una conexión con https mediante _curl_
 Ahora con rsync he copiado los archivos _apache.crt_ y _apache.key_ a la segunda máquina y al balanceador Nginx con rsync. En la segunda máquina los he movido a __etc/apache2/ssl__ y he modificado el archivo de configuración y activado el sitio ssl igual que en la primera máquina.
 En el balanceador he modificado __/etc/nginx/conf.d/default.conf__ añadiendo lo siguiente, y he reiniciado _Nginx_.
 ```
-listen 443 ssl;
-ssl on;
+listen 443 default_server ssl;
 ssl_certificate /tmp/apache.crt;
 ssl_certificate_key /tmp/apache.key;
 ```
+![](6.png)
+ 
 ### Configurar cortafuegos
 En la máquina SWAP1 he creado un cript __cortafuegos.sh__ en __etc/init.d/__ y lo he configurado para que se pueda ejecutar. He añadido las reglas que se ven en la imagen para resetear la configuración, denegar cualquier tráfico por defecto y después permitir los puertos 22, 80 y 443 para SSH, HTTP y HTTPS, respectivamente. 
 Después con `netstat -tulpn` podemos ver los puertos abiertos.
