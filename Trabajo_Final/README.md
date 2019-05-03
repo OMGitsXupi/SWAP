@@ -85,3 +85,5 @@ Ya está creado el balanceador. Para conectarnos a él, tendremos que copiar el 
 ![ ](capturas/15.png)
 
 Ahora, con un algoritmo de Round Robin, va alternando entre las dos instancias cada vez que hay una petición. Podemos comprobarlo cambiando el archivo de la web de Apache con `sudo nano /var/www/html/index.html` y veremos que va alternando.
+## Balanceador de carga elástico
+Hay otra opción que, añadiendo una regla al balanceador, si la carga supera por ejemplo el 80%, clone las instancias para que tenga más disponibilidad, y cuando la carga llegue por ejemplo al 20% se destruyan esas instancias extra y nos quedemos únicamente con las 2 iniciales.
