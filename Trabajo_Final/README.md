@@ -87,3 +87,6 @@ Ya está creado el balanceador. Para conectarnos a él, tendremos que copiar el 
 Ahora, con un algoritmo de Round Robin, va alternando entre las dos instancias cada vez que hay una petición. Podemos comprobarlo cambiando el archivo de la web de Apache con `sudo nano /var/www/html/index.html` y veremos que va alternando.
 ## Balanceador de carga elástico
 Hay otra opción que, añadiendo una regla al balanceador, si la carga supera por ejemplo el 80%, clone las instancias para que tenga más disponibilidad, y cuando la carga llegue por ejemplo al 20% se destruyan esas instancias extra y nos quedemos únicamente con las 2 iniciales.
+Esto se puede hacer con las opciones auto escalables. Creando una _Configuración de lanzamiento_ que se base en una de las instancias que tenemos (con el Apache instalado y los ficheros html que queramos) y un _Grupo de Auto Scaling_ que cree las instancias que queramos cuando la carga supere un porcentaje o haya cierto número de peticiones simultáneas. Tendremos que asignarle el _Target Group_ y a este un _Load Balancer_ para poder conectarnos.
+Aquí vemos un ejemplo de un grupo de auto escalado, que está enlazado a un _Target Group_ que es donde se crearán las instancias.
+![ ](capturas/16.png)
