@@ -90,3 +90,6 @@ Hay otra opción que, añadiendo una regla al balanceador, si la carga supera po
 Esto se puede hacer con las opciones auto escalables. Creando una _Configuración de lanzamiento_ que se base en una de las instancias que tenemos (con el Apache instalado y los ficheros html que queramos) y un _Grupo de Auto Scaling_ que cree las instancias que queramos cuando la carga supere un porcentaje o haya cierto número de peticiones simultáneas. Tendremos que asignarle el _Target Group_ y a este un _Load Balancer_ para poder conectarnos.
 Aquí vemos un ejemplo de un grupo de auto escalado, que está enlazado a un _Target Group_ que es donde se crearán las instancias.
 ![ ](capturas/16.png)
+
+Aquí podemos ver las políticas de escalado para que al superar la carga el 60% se cree una instancia, y al bajar del 20% se destruya una instancia.
+![ ](capturas/17.png)
