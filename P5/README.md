@@ -35,7 +35,9 @@ El maestro es la máquina __SWAP1__. He tenido que modificar el archivo _/etc/my
 - #server-id = 1 -> server-id = 1
 - #log_bin	= /var/log/mysql/mysql-bin.log -> log_bin	= /var/log/mysql/bin.log
 Y con `/etc/init.d/mysql restart` reiniciamos el servicio (debe poner _ok_).
+
 ![](capturas/5.png)
+
 Como mi versión de mysql es 5.5 o superior, en la máquina esclavo (__SWAP2__) habrá que hacer los mismos pasos, excepto que _server-id = 1_ será _server-id = 2_.
 Ahora en la máquina __SWAP1__ entré en mysql y puse lo siguiente para crear el usuario _esclavo_:
 ```
@@ -46,7 +48,9 @@ mysql> FLUSH TABLES;
 mysql> FLUSH TABLES WITH READ LOCK;
 ```
 Y con `mysql> SHOW MASTER STATUS;` veremos los datos necesarios para enlazar el esclavo con el maestro como se ve en la imagen:
+
 ![](capturas/6.png)
+
 En __SWAP2__, en mysql he puesto lo siguiente para enlazarlos y empezar el esclavo:
 ```
 mysql> CHANGE MASTER TO MASTER_HOST='192.168.56.105', MASTER_USER='esclavo', MASTER_PASSWORD='esclavo', MASTER_LOG_FILE='bin.000001', MASTER_LOG_POS=980, MASTER_PORT=3306;
