@@ -2,7 +2,9 @@
 ### Por: Antonio Galdó Seiquer
 ### Replicar datos de una máquina a otra
 Primero, he creado en ambas máquinas (SWAP1 y SWAP2), una base de datos llamada __contactos__ con una tabla llamada __datos__, pero sólo he creado la tabla en la BD de la máquina SWAP1.
+
 ![](capturas/1.png) 
+
 Con mysqldump podemos hacer un _backup_ de los datos de la BD, pero antes hay que bloquear los datos primero:
 ```
 xupi@SWAP:~$ mysql -u root –p
