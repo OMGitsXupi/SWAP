@@ -22,6 +22,7 @@ mysql> UNLOCK TABLES;
 mysql> quit
 ```
 ![](capturas/2.png) 
+
 En la máquina SWAP2 he hecho lo siguiente para copiar el _backup_ de una máquina a otra y restaurar los datos (la tabla __datos__ se crea automáticamente:
 ```
 xupi@SWAP:~$ scp maquina1:/tmp/ejemplodb.sql /tmp/
@@ -29,6 +30,7 @@ xupi@SWAP:~$ mysql -u root -p contactos < /tmp/contactos.sql
 ```
 ![](capturas/3.png) 
 ![](capturas/4.png) 
+
 ### Replicar la _BD_ mediante la configuración _maestro/esclavo_ 
 El maestro es la máquina __SWAP1__. He tenido que modificar el archivo _/etc/mysql/mysql.conf.d/mysqld.cnf_ de la siguiente manera:
 - bind-address 127.0.0.1 -> #bind-address 127.0.0.1
@@ -57,9 +59,13 @@ mysql> CHANGE MASTER TO MASTER_HOST='192.168.56.105', MASTER_USER='esclavo', MAS
 mysql> START SLAVE;
 ```
 ![](capturas/7.png)
+
 En __SWAP1__ he hecho `mysql> UNLOCK TABLES;` para poder modificar los datos y después en __SWAP2__, `mysql> SHOW SLAVE STATUS\G` para comprobar que todo va bien:
 (terminal de la máquina host con ssh para ampliar el mensaje en la terminal):
+
 ![](capturas/8.png)
+
 Podemos comprobar que todo va bien porque la variable _Seconds_Behind_Master_ vale 0, o _Master_Server_Id_ debe valer 1 (yo por esto me di cuenta de que tenía un fallo y tuve que repetir el último paso).
 Si está bien configurado, podremos modificar o insertar datos en __SWAP1__ (el maestro) y se replicará en __SWAP2__ (el esclavo).
+
 ![](capturas/9.png)
