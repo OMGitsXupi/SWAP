@@ -29,7 +29,6 @@ xupi@SWAP:~$ mysql -u root -p contactos < /tmp/contactos.sql
 ```
 ![](capturas/3.png) 
 ![](capturas/4.png) 
->
 ### Replicar la _BD_ mediante la configuración _maestro/esclavo_ 
 El maestro es la máquina __SWAP1__. He tenido que modificar el archivo _/etc/mysql/mysql.conf.d/mysqld.cnf_ de la siguiente manera:
 - bind-address 127.0.0.1 -> #bind-address 127.0.0.1
